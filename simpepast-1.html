@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Past Tense Game</title>
+    <link rel="stylesheet" href="css_file.css">
+</head>
+<body>
+
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #000000;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+   background-image: url('https://images.pexels.com/photos/15539377/pexels-photo-15539377/free-photo-of-mar-naturaleza-puesta-de-sol-playa.jpeg?auto=compress&cs=tinysrgb&w=600');
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #3498db;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.instructions {
+    background-color: #e8f4f8;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    height: 20px;
+}
+
+.progress {
+    background-color: #3498db;
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.3s;
+}
+
+.question-container {
+    margin-bottom: 20px;
+}
+
+.sentence-type {
+    font-weight: bold;
+    color: #3498db;
+    margin-bottom: 5px;
+}
+
+.question {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.option {
+    padding: 12px;
+    background-color: #f1f5f9;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.option:hover {
+    background-color: #e1ebf5;
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    background-color: #d4e6f7;
+    border-color: #3498db;
+}
+
+
+.feedback {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.result-container {
+    text-align: center;
+    display: none;
+    padding: 20px;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+.score {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+.score-text {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.button-atras button:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.button-atras button {
+    background-color: white;
+    color: #0074D9;
+    border: 2px solid #f7f9fa;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mistakes-section {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #004155;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #00aeff;
+}
+
+.mistakes-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.mistake-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border-left: 4px solid #dc3545;
+}
+
+.mistake-question {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.mistake-details {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.correct-answer {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.perfect-score {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #c3e6cb;
+}
+</style>
+    <div class="container"> 
+        <div class="button-atras">
+            <button onclick="history.back()"><a href="file:///C:/Users/usuario/Downloads/web20.html#past-simple"><b>←</b></a></button>
+        </div>
+
+        <h1>Simple Past Tense Game</h1>
+        
+        <div class="instructions">
+            <p>Complete each sentence by selecting the correct verb form in simple past tense. The game includes affirmative, negative, and interrogative sentences.</p>
+            <p>You'll get 1 point for each correct answer. The game will automatically advance to the next question after you select an answer.</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div id="game-area">
+            <div class="question-container">
+                <div class="sentence-type" id="sentence-type"></div>
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+        
+        <div class="result-container" id="result-container">
+            <h2>Game Completed!</h2>
+            <p>Your final score:</p>
+            <div class="score" id="final-score">0/15</div>
+            <p class="score-text" id="score-text">Keep practicing to improve your simple past tense skills!</p>
+            
+            <div id="perfect-section" class="perfect-score" style="display: none;">
+                <h3>🎉 Perfect Score! 🎉</h3>
+                <p>Congratulations! You answered all questions correctly. You have mastered the simple past tense!</p>
+            </div>
+            
+            <div id="mistakes-section" class="mistakes-section" style="display: none;">
+                <div class="mistakes-title">Review Your Mistakes</div>
+                <div id="mistakes-list"></div>
+            </div>
+            <br>
+            <button id="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="js_file.js"></script>
+
+<sctipt>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const questions = [
+        { 
+            type: "Affirmative", 
+            question: "She _____ to the beach last weekend.", 
+            options: ["go", "went", "gone", "going"], 
+            correctAnswer: "went" 
+        },
+        { 
+            type: "Affirmative", 
+            question: "They _____ dinner at 8 PM yesterday.", 
+            options: ["ate", "eat", "eated", "ated"], 
+            correctAnswer: "ate" 
+        },
+        { 
+            type: "Affirmative", 
+            question: "I _____ the movie before class.", 
+            options: ["watch", "watched", "watches", "watching"], 
+            correctAnswer: "watched" 
+        },
+        { 
+            type: "Affirmative", 
+            question: "We _____ a movie last night.", 
+            options: ["see", "saw", "seen", "seeing"], 
+            correctAnswer: "saw" 
+        },
+        { 
+            type: "Affirmative", 
+            question: "He _____ a new car last month.", 
+            options: ["buy", "bought", "buys", "buying"], 
+            correctAnswer: "bought" 
+        },
+        { 
+            type: "Negative", 
+            question: "They _________ soccer yesterday.", 
+            options: ["didn't play", "don't played", "doesn't play", "did not played"], 
+            correctAnswer: "didn't play" 
+        },
+        { 
+            type: "Negative", 
+            question: "She _________ for the test.", 
+            options: ["not studied ", "don't study", "doesn't studied", "didn't study"], 
+            correctAnswer: "didn't study" 
+        },
+        { 
+            type: "Negative", 
+            question: "I _________ breakfast this morning.", 
+            options: ["doesn't eat ", "don't eat", "didn't eat", "not eat"], 
+            correctAnswer: "didn't eat" 
+        },
+        { 
+            type: "Negative", 
+            question: "We _________ to Europe.", 
+            options: ["didn't traveled", "didn't travel", "doesn't traveled", "not travel"], 
+            correctAnswer: "didn't travel" 
+        },
+        { 
+            type: "Negative", 
+            question: "He _________ the project.", 
+            options: ["doesn't finished", "don't finish", "didn't finish", "not finished"], 
+            correctAnswer: "didn't finish" 
+        },
+        { 
+            type: "Interrogative", 
+            question: "_____ you _____ your grandparents last month?", 
+            options: ["Do-visit", "Have visited", "Did-visited", " Did-visit"], 
+            correctAnswer: " Did-visit" 
+        },
+        { 
+            type: "Interrogative", 
+            question: "_____ she _____ dinner yesterday?", 
+            options: ["Did-cooked", "Did-cook", "Was-cook", "Is-cooked"], 
+            correctAnswer: "Did-cook" 
+        },
+        { 
+            type: "Interrogative", 
+            question: "_____ they _____ the soccer game?", 
+            options: ["Do-wathc", "were-watch", "Did-watch", "Did-watched"], 
+            correctAnswer: "Did-watch" 
+        },
+        { 
+            type: "Interrogative", 
+            question: "_____ he ______ his room?", 
+            options: ["Did-cleaned", "Did-clean", "Is-clean", "Was-clean"], 
+            correctAnswer: "Did-clean" 
+        },
+        { 
+            type: "Interrogative", 
+            question: "_____ we ______ the homework on time?", 
+            options: ["Did-finish", "Do-finished", "Were-finish", "Are-finished"], 
+            correctAnswer: "Did-finish" 
+        }
+    ];
+
+   
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let selectedOption = null;
+    let shuffledQuestions = [];
+    let userAnswers = []; 
+
+    
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const restartBtn = document.getElementById('restart-btn');
+    const progressEl = document.getElementById('progress');
+    const resultContainerEl = document.getElementById('result-container');
+    const gameAreaEl = document.getElementById('game-area');
+    const finalScoreEl = document.getElementById('final-score');
+    const scoreTextEl = document.getElementById('score-text');
+    const sentenceTypeEl = document.getElementById('sentence-type');
+    const perfectSectionEl = document.getElementById('perfect-section');
+    const mistakesSectionEl = document.getElementById('mistakes-section');
+    const mistakesListEl = document.getElementById('mistakes-list');
+
+   
+    function shuffleQuestions() {
+        shuffledQuestions = [...questions];
+        for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+        }
+    }
+
+    
+    function initGame() {
+        shuffleQuestions();
+        currentQuestionIndex = 0;
+        score = 0;
+        userAnswers = []; 
+        resultContainerEl.style.display = 'none';
+        gameAreaEl.style.display = 'block';
+        loadQuestion();
+        updateProgress();
+    }
+
+   
+    function loadQuestion() {
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        sentenceTypeEl.textContent = `Type: ${currentQuestion.type}`;
+        questionEl.textContent = currentQuestion.question;
+        optionsEl.innerHTML = '';
+        
+       
+        currentQuestion.options.forEach((option) => {
+            const optionEl = document.createElement('div');
+            optionEl.className = 'option';
+            optionEl.textContent = option;
+            optionEl.dataset.option = option;
+            optionEl.addEventListener('click', selectOption);
+            optionsEl.appendChild(optionEl);
+        });
+        
+        feedbackEl.style.display = 'none';
+        selectedOption = null;
+    }
+
+
+    function selectOption(event) {
+        if (selectedOption) return; 
+        
+        const options = document.querySelectorAll('.option');
+        options.forEach(option => option.classList.remove('selected'));
+        
+        event.target.classList.add('selected');
+        selectedOption = event.target.dataset.option;
+        
+        checkAnswer();
+    }
+
+   
+    function checkAnswer() {
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        const isCorrect = selectedOption === currentQuestion.correctAnswer;
+        const options = document.querySelectorAll('.option');
+        
+        
+        userAnswers.push({
+            question: currentQuestion.question,
+            type: currentQuestion.type,
+            userAnswer: selectedOption,
+            correctAnswer: currentQuestion.correctAnswer,
+            isCorrect: isCorrect
+        });
+        
+      
+        options.forEach(option => {
+            if (option.dataset.option === currentQuestion.correctAnswer) {
+                option.classList.add('correct');
+            } else if (option.dataset.option === selectedOption && !isCorrect) {
+                option.classList.add('incorrect');
+            }
+        });
+        
+        feedbackEl.style.display = 'block';
+        if (isCorrect) {
+            score++;
+        }
+        
+       
+        setTimeout(nextQuestion, 1500);
+    }
+
+    
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < shuffledQuestions.length) {
+            loadQuestion();
+            updateProgress();
+        } else {
+            showResults();
+        }
+    }
+
+   
+    function updateProgress() {
+        const progressPercentage = (currentQuestionIndex / shuffledQuestions.length) * 100;
+        progressEl.style.width = `${progressPercentage}%`;
+    }
+
+    
+    function showResults() {
+        gameAreaEl.style.display = 'none';
+        resultContainerEl.style.display = 'block';
+        finalScoreEl.textContent = `${score}/${shuffledQuestions.length}`;
+        
+        
+        if (score === shuffledQuestions.length) {
+            
+            scoreTextEl.textContent = 'Perfect! You mastered the simple past tense.';
+            perfectSectionEl.style.display = 'block';
+            mistakesSectionEl.style.display = 'none';
+        } else {
+            
+            if (score >= shuffledQuestions.length * 0.8) {
+                scoreTextEl.textContent = 'Excellent! Almost perfect.';
+            } else if (score >= shuffledQuestions.length * 0.6) {
+                scoreTextEl.textContent = 'Good job, but you can improve.';
+            } else {
+                scoreTextEl.textContent = 'Keep practicing the simple past tense.';
+            }
+            
+            perfectSectionEl.style.display = 'none';
+            showMistakes();
+        }
+    }
+
+    
+    function showMistakes() {
+        const mistakes = userAnswers.filter(answer => !answer.isCorrect);
+        
+        if (mistakes.length > 0) {
+            mistakesSectionEl.style.display = 'block';
+            mistakesListEl.innerHTML = '';
+            
+            mistakes.forEach((mistake, index) => {
+                const mistakeDiv = document.createElement('div');
+                mistakeDiv.className = 'mistake-item';
+                
+                mistakeDiv.innerHTML = `
+                    <div class="mistake-question">${index + 1}. ${mistake.question}</div>
+                    <div class="mistake-details">
+                        <strong>Type:</strong> ${mistake.type}<br>
+                        <strong>Your answer:</strong> <span class="wrong-answer">${mistake.userAnswer}</span><br>
+                        <strong>Correct answer:</strong> <span class="correct-answer">${mistake.correctAnswer}</span>
+                    </div>
+                `;
+                
+                mistakesListEl.appendChild(mistakeDiv);
+            });
+        }
+    }
+
+    
+    restartBtn.addEventListener('click', initGame);
+
+    
+    initGame();
+});
+</script>
+
+
+</body>
+</html>
