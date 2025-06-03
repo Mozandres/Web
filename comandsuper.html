@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparatives and Superlatives Game</title>
+    <link rel="stylesheet" href="comparativos.css">
+</head>
+<body>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #000000;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+   background-image: url('https://images.pexels.com/photos/15539377/pexels-photo-15539377/free-photo-of-mar-naturaleza-puesta-de-sol-playa.jpeg?auto=compress&cs=tinysrgb&w=600');
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #3498db;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.instructions {
+    background-color: #e8f4f8;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    height: 20px;
+}
+
+.progress {
+    background-color: #3498db;
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.3s;
+}
+
+.question-container {
+    margin-bottom: 20px;
+}
+
+.sentence-type {
+    font-weight: bold;
+    color: #3498db;
+    margin-bottom: 5px;
+}
+
+.question {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.option {
+    padding: 12px;
+    background-color: #f1f5f9;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.option:hover {
+    background-color: #e1ebf5;
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    background-color: #d4e6f7;
+    border-color: #3498db;
+}
+
+
+.feedback {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.result-container {
+    text-align: center;
+    display: none;
+    padding: 20px;
+    background-color: #e8f4f8;
+    border-radius: 5px;
+}
+
+.score {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+.score-text {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.button-atras button:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.button-atras button {
+    background-color: white;
+    color: #0074D9;
+    border: 2px solid #f7f9fa;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mistakes-section {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #004155;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #00aeff;
+}
+
+.mistakes-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.mistake-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border-left: 4px solid #dc3545;
+}
+
+.mistake-question {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.mistake-details {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.correct-answer {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.wrong-answer {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.perfect-score {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border: 1px solid #c3e6cb;
+}
+</style>
+
+    <div class="container"> 
+        <div class="button-atras">
+            <button onclick="history.back()"><a href="file:///C:/Users/usuario/Downloads/web20.html#past-simple"><b>←</b></a></button>
+        </div>
+
+        <h1>Comparatives and Superlatives Game</h1>
+        
+        <div class="instructions">
+            <p>Complete each sentence by selecting the correct verb form in simple past tense. The game includes affirmative, negative, and interrogative sentences.</p>
+            <p>You'll get 1 point for each correct answer. The game will automatically advance to the next question after you select an answer.</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <div id="game-area">
+            <div class="question-container">
+                <div class="sentence-type" id="sentence-type"></div>
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+        
+        <div class="result-container" id="result-container">
+            <h2>Game Completed!</h2>
+            <p>Your final score:</p>
+            <div class="score" id="final-score">0/15</div>
+            <p class="score-text" id="score-text">Keep practicing to improve your simple past tense skills!</p>
+            
+            <div id="perfect-section" class="perfect-score" style="display: none;">
+                <h3>🎉 Perfect Score! 🎉</h3>
+                <p>Congratulations! You answered all questions correctly. You have mastered the simple past tense!</p>
+            </div>
+            
+            <div id="mistakes-section" class="mistakes-section" style="display: none;">
+                <div class="mistakes-title">Review Your Mistakes</div>
+                <div id="mistakes-list"></div>
+            </div>
+            <br>
+            <button id="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="comparativos.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const questions = [
+        {
+        type: "Affirmative",
+        question: "This mountain is _____ than the other one.",
+        options: ["highly", "the highest", "most high", "higher"], 
+        correctAnswer: "higher"
+    },
+    {
+        type: "Affirmative",
+        question: "She is the _____ student in the class.",
+        options: ["smartest", "more smart", "smarter", "most smart"],
+        correctAnswer: "smartest"
+    },
+    {
+        type: "Affirmative",
+        question: "This book is _____ than the one I read last week.",
+        options: ["interestinger", "more interesting", "most interesting", "interestingest"],
+        correctAnswer: "more interesting"
+    },
+    {
+        type: "Affirmative",
+        question: "That was the _____ movie I've ever seen.",
+        options: ["more boring", "boringer", "most boring", "boringest"], 
+        correctAnswer: "most boring"
+    },
+    {
+        type: "Affirmative",
+        question: "Tom is _____ than his brother.",
+        options: ["taller", "tallest", "the tallest", "more tall"],
+        correctAnswer: "taller"
+    },
+    {
+        type: "Negative",
+        question: "This phone is not _____ than the new model.",
+        options: ["the fastest", "fastest", "faster", "more fast"], 
+        correctAnswer: "faster"
+    },
+    {
+        type: "Negative",
+        question: "She is not the _____ singer in the group.",
+        options: ["better", " best", "more good", "gooder"],
+        correctAnswer: "best"
+    },
+    {
+        type: "Negative",
+        question: "That show wasn't _____ than the one we saw last night.",
+        options: ["entertained", "entertaininger", "most entertaining", "more entertaining"], 
+        correctAnswer: "more entertaining"
+    },
+    {
+        type: "Negative",
+        question: "This exam is not the _____ we've had.",
+        options: ["hardest", "more hard", "harder", "most hard"],
+        correctAnswer: "hardest"
+    },
+    {
+        type: "Negative",
+        question: "My car is not _____ than yours.",
+        options: ["the newest", " newer", "more new", "most new"],
+        correctAnswer: "newer"
+    },
+     {
+        type: "Interrogative",
+        question: "Who is the _____ player on the team?",
+        options: ["more good", "better", "best", "most good"], 
+        correctAnswer: "best"
+    },
+    {
+        type: "Interrogative",
+        question: "Is this hotel _____ than the one downtown?",
+        options: ["cheaply", "more cheap", "cheapest", " cheaper"],
+        correctAnswer: "cheaper"
+    },
+    {
+        type: "Interrogative",
+        question: "What is the _____ animal in the world?",
+        options: ["most large", "larger", "more large", "largest"], 
+        correctAnswer: "largest"
+    },
+    {
+        type: "Interrogative",
+        question: "Is English _____ than German?",
+        options: ["the easiest", "easier", "most easy", "more easier"], 
+        correctAnswer: "easier"
+    },
+    {
+        type: "Interrogative",
+        question: "Which one is the _____ option?",
+        options: ["most expensive", "more expensive", "expensiver", "the expensivest"],
+        correctAnswer: "most expensive"
+    }
+    ];
+
+   
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let selectedOption = null;
+    let shuffledQuestions = [];
+
+    
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const restartBtn = document.getElementById('restart-btn');
+    const progressEl = document.getElementById('progress');
+    const resultContainerEl = document.getElementById('result-container');
+    const gameAreaEl = document.getElementById('game-area');
+    const finalScoreEl = document.getElementById('final-score');
+    const scoreTextEl = document.getElementById('score-text');
+    const sentenceTypeEl = document.getElementById('sentence-type');
+
+    
+    function shuffleQuestions() {
+        shuffledQuestions = [...questions];
+        for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+        }
+    }
+
+    
+    function initGame() {
+        shuffleQuestions();
+        currentQuestionIndex = 0;
+        score = 0;
+        resultContainerEl.style.display = 'none';
+        gameAreaEl.style.display = 'block';
+        loadQuestion();
+        updateProgress();
+    }
+
+ 
+    function loadQuestion() {
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        sentenceTypeEl.textContent = `Type: ${currentQuestion.type}`;
+        questionEl.textContent = currentQuestion.question;
+        optionsEl.innerHTML = '';
+        
+        currentQuestion.options.forEach((option) => {
+            const optionEl = document.createElement('div');
+            optionEl.className = 'option';
+            optionEl.textContent = option;
+            optionEl.dataset.option = option;
+            optionEl.addEventListener('click', selectOption);
+            optionsEl.appendChild(optionEl);
+        });
+        
+        feedbackEl.style.display = 'none';
+        selectedOption = null;
+    }
+
+   
+    function selectOption(event) {
+        if (selectedOption) return;
+        
+        const options = document.querySelectorAll('.option');
+        options.forEach(option => option.classList.remove('selected'));
+        
+        event.target.classList.add('selected');
+        selectedOption = event.target.dataset.option;
+        
+        
+        checkAnswer();
+    }
+
+    
+    function checkAnswer() {
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        const isCorrect = selectedOption === currentQuestion.correctAnswer;
+        const options = document.querySelectorAll('.option');
+        
+        options.forEach(option => {
+            if (option.dataset.option === currentQuestion.correctAnswer) {
+                option.classList.add('correct');
+            } else if (option.dataset.option === selectedOption && !isCorrect) {
+                option.classList.add('incorrect');
+            }
+        });
+        
+        feedbackEl.style.display = 'block';
+        if (isCorrect) {
+            
+            score++;
+        } else {
+           
+        }
+        
+       
+        setTimeout(nextQuestion, 1500);
+    }
+
+    
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < shuffledQuestions.length) {
+            loadQuestion();
+            updateProgress();
+        } else {
+            showResults();
+        }
+    }
+
+    
+    function updateProgress() {
+        const progressPercentage = (currentQuestionIndex / shuffledQuestions.length) * 100;
+        progressEl.style.width = `${progressPercentage}%`;
+    }
+
+    
+    function showResults() {
+        gameAreaEl.style.display = 'none';
+        resultContainerEl.style.display = 'block';
+        finalScoreEl.textContent = `${score}/${shuffledQuestions.length}`;
+        
+        if (score === shuffledQuestions.length) {
+            scoreTextEl.textContent = 'Perfect! You mastered the simple past tense.';
+        } else if (score >= shuffledQuestions.length * 0.8) {
+            scoreTextEl.textContent = 'Excellent! Almost perfect.';
+        } else if (score >= shuffledQuestions.length * 0.6) {
+            scoreTextEl.textContent = 'Good job, but you can improve.';
+        } else {
+            scoreTextEl.textContent = 'Keep practicing the simple past tense.';
+        }
+    }
+
+    
+    restartBtn.addEventListener('click', initGame);
+
+    
+    initGame();
+});
+
+<script>
+
+</body>
+</html>
